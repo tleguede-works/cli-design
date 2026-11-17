@@ -14,7 +14,29 @@ Most of a CLI's quality lives in defaults nobody notices until they're wrong —
 
 ## Install
 
-As a Claude Code plugin, drop the directory into your plugins (or point your plugin manifest at this repo):
+### With `npx skills`
+
+The quickest way — installs the skill into any supported agent (Claude Code, Codex, Cursor, Copilot, Gemini CLI…):
+
+```bash
+npx skills add tleguede-works/cli-design
+```
+
+Add `-g` to install it for every project (user-level) instead of just the current one:
+
+```bash
+npx skills add tleguede-works/cli-design -g
+```
+
+To keep it up to date afterwards:
+
+```bash
+npx skills update cli-design
+```
+
+### As a Claude Code plugin
+
+Clone the repo and point your plugin configuration at it:
 
 ```bash
 git clone https://github.com/tleguede-works/cli-design.git
@@ -22,9 +44,14 @@ git clone https://github.com/tleguede-works/cli-design.git
 
 The plugin manifest is `.claude-plugin/plugin.json` and exposes the single skill `cli-design`.
 
+### Manually
+
+Copy `skills/cli-design/` into your agent's skills directory (for example `~/.claude/skills/` for Claude Code), keeping `SKILL.md` at the root of the copied folder.
+
 ## Layout
 
 ```
+LICENSE                             # CC BY-SA 4.0
 .claude-plugin/plugin.json          # plugin manifest
 skills/cli-design/
   SKILL.md                          # the skill: mindset, workflow, essentials, review checklist
@@ -51,6 +78,17 @@ python3 skills/cli-design/scripts/audit_cli.py --json -- python -m myapp
 
 It exits non-zero if any check fails, so it can run in CI. It only covers what is observable from the outside — the review checklist in `SKILL.md` still needs someone to read the code.
 
+## Credits
+
+This skill is a derivative work. Credit belongs to:
+
+- **Command Line Interface Guidelines (clig.dev)** — Aanand Prasad, Ben Firshman, Carl Tashian and Eva Parish. The guidance here is adapted from the [Command Line Interface Guidelines](https://clig.dev/), licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The licence text is preserved at `skills/cli-design/LICENSE-clig-CC-BY-SA-4.0.txt`.
+- **Claude (Anthropic)** — the skill's structure, workflow, review checklist, reference files and `audit_cli.py` were written with Claude, Anthropic's AI assistant, working alongside the author.
+
+Maintained by [@tleguede-works](https://github.com/tleguede-works).
+
 ## License
 
-The skill's guidance is adapted from *Command Line Interface Guidelines* (https://clig.dev) by Aanand Prasad, Ben Firshman, Carl Tashian and Eva Parish, licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). This skill's text is shared under the same license — see `skills/cli-design/LICENSE-clig-CC-BY-SA-4.0.txt`.
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) — see [`LICENSE`](LICENSE).
+
+You are free to share and adapt this material, provided you give appropriate credit, link to the licence, indicate whether changes were made, and license your contributions under the same terms. As a derivative of clig.dev, this skill must stay under CC BY-SA 4.0.
